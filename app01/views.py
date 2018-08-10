@@ -22,13 +22,14 @@ def buy(request,pk):
         return HttpResponse('商品不存在')
     #  1. 创建订单
     no = str(uuid.uuid4())
-    models.Orders.objects.create(no=no,good=good_obj)
+    orders_obj = models.Orders.objects.create(no=no,good=good_obj)
+    print("order",orders_obj)
     #  2. 根据支付宝SDK生成跳转链接
     alipay = AliPay(
         # 配置APPID
         appid="2016091800538549",
-        app_notify_url="http://118.25.231.23:8899/index/",  # POST,发送支付状态信息
-        return_url="http://118.25.231.23:8899/check_order/",  # GET,将用户浏览器地址重定向回原网站
+        app_notify_url="http://118.25.231.23:8899/check_order/",  # POST,发送支付状态信息
+        return_url="http://118.25.231.23:8899/index/",  # GET,将用户浏览器地址重定向回原网站
         # 配置私钥
         app_private_key_path="keys/key_private.txt",
         # 配置公钥
@@ -53,8 +54,8 @@ def check_order(request):
         alipay = AliPay(
             # 配置APPID
             appid="2016091800538549",
-            app_notify_url="http://118.25.231.23:8899/index/",  # POST,发送支付状态信息
-            return_url="http://118.25.231.23:8899/check_order/",  # GET,将用户浏览器地址重定向回原网站
+            app_notify_url="http://118.25.231.23:8899/check_order/",  # POST,发送支付状态信息
+            return_url="http://118.25.231.23:8899/index/",  # GET,将用户浏览器地址重定向回原网站
             # 配置私钥
             app_private_key_path="keys/key_private.txt",
             # 配置公钥

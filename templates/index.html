@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        {% for good in goods %}
+            <li>
+                {{ good.title }}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                {{ good.price }}
+                 &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/buy/{{ good.id }}">点我购买啊</a>
+            </li>
+        {% endfor %}
+
+    </ul>
+</body>
+</html>
